@@ -6,7 +6,7 @@ describe Expense do
     expect(new_expense).to be_an_instance_of Expense
   end
 
-  it 'will start with an empty array' do
+  it 'willl start with an empty array' do
     expect(Expense.all).to eq []
   end
 end
