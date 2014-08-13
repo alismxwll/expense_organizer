@@ -15,5 +15,19 @@ describe Expense do
     new_expense.save
     expect(Expense.all).to eq [new_expense]
   end
+
+  it 'will be the same object if it has the same id' do
+    new_expense = Expense.new({'description' => 'coffee', 'amount' => 2.30})
+    new_expense.save
+    expect(Expense.all).to eq [new_expense]
+  end
+
+  it 'is a different object if it has a different id' do
+    new_expense = Expense.new({'description' => 'coffee', 'amount' => 2.30})
+    new_expense.save
+    new_expense2 = Expense.new({'description' => 'coffee', 'amount' => 2.30})
+    new_expense2.save
+    expect(Expense.all).to eq [new_expense, new_expense2]
+  end
 end
 
