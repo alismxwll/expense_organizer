@@ -38,5 +38,11 @@ describe Expense do
     new_expense.add_category(new_category)
     expect(new_expense.category).to eq [new_category]
   end
+
+  it 'will delete expenses' do
+    new_expense = Expense.new({'description' => 'coffee', 'amount' => 9855.09}).save
+    new_expense.delete_expense!
+    expect(Expense.all).to eq []
+  end
 end
 

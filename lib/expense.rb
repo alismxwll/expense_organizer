@@ -45,4 +45,8 @@ attr_reader :description, :amount, :id
   def add_category(category_id)
     DB.exec("INSERT INTO expense_category (expense_id, category_id) VALUES (#{self.id}, #{category_id.id});")
   end
+
+  def delete_expense!
+    DB.exec("DELETE FROM expense WHERE id = #{self.id};")
+  end
 end

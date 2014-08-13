@@ -32,4 +32,16 @@ describe Category do
     new_category.add_expense(new_expense)
     expect(new_category.expenses).to eq [new_expense]
   end
+
+  describe 'find_or_create' do
+    it 'returns the category if there is one with the given name' do
+      new_category = Category.new({'name' => 'Foodu'})
+      expect(Category.find_or_create('Foodu')).to eq new_category
+    end
+
+    it 'it creates a new category if there is not one that matches the given name' do
+      new_category = Category.find_or_create('Biscuits')
+      expect(Category.all).to eq [new_category]
+    end
+  end
 end
