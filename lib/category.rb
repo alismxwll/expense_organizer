@@ -7,7 +7,14 @@ class Category
   end
 
   def self.all
-    []
+    categories = []
+    results = DB.exec("SELECT * FROM category")
+    results.each do |result|
+      name = result['name']
+      id = result['id']
+      categories << Category.new({'name' => name, 'id' => id})
+    end
+    categories
   end
 
   def save
