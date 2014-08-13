@@ -11,7 +11,7 @@ class Category
     results = DB.exec("SELECT * FROM category")
     results.each do |result|
       name = result['name']
-      id = result['id']
+      id = result['id'].to_i
       categories << Category.new({'name' => name, 'id' => id})
     end
     categories
@@ -22,4 +22,7 @@ class Category
     @id = results.first['id'].to_i
   end
 
+  def ==(another_category)
+    self.name == another_category.name
+  end
 end

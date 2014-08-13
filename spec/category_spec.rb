@@ -15,4 +15,12 @@ describe Category do
     new_category.save
     expect(Category.all).to eq [new_category]
   end
+
+  it 'is the same category if it has the same name' do
+    new_category = Category.new({'name' => 'Foodu'})
+    new_category.save
+    new_category_two = Category.new({'name' => 'Foodu'})
+    new_category_two.save
+    expect(new_category).to eq new_category_two
+  end
 end
