@@ -23,4 +23,13 @@ describe Category do
     new_category_two.save
     expect(new_category).to eq new_category_two
   end
+
+  it 'adds and expense to a category' do
+    new_category = Category.new({'name' => 'Foodu'})
+    new_category.save
+    new_expense = Expense.new({'description' => 'Dog Food', 'amount' => 28.97})
+    new_expense.save
+    new_category.add_expense(new_expense)
+    expect(new_category.expenses).to eq [new_expense]
+  end
 end

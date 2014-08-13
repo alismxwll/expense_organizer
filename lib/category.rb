@@ -25,4 +25,22 @@ class Category
   def ==(another_category)
     self.name == another_category.name
   end
+
+  def expenses
+    expenses = []
+    results = DB.exec("SELECT expense.* FROM category
+                      JOIN expense_category ON (category.id = expense_category.category_id)
+                      JOIN expense ON (expense_category.expense_id = expense_id)
+                      WHERE category.id = #{self.id}")
+  results.each do |result|
+    id = result['id'].to_i
+    description = result['description']
+    amount = result['amount'].to_f
+    expenses << Expense.new({'description' => description, 'amount' => amount, 'id' => id})
+  end
+  expenses
+end
+  def add_expense(expense)
+    DB.exec("INSERT INTO expense_category (expense_id, category_id) VALUES (#{expense.id}, #{self.id});")
+  end
 end
